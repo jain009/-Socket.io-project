@@ -27,9 +27,10 @@ io.on("connection", (socket) => {
     console.log("a user has been connected");
     console.log("with id", socket.id);
 
-    socket.on("message", (data) => {
-        console.log("Server received:", data);
-        io.emit("message", data); // Broadcast to all clients including sender.
+    socket.on("message", ({room, message}) => {
+        console.log({room, message});
+        // io.emit("message", data); // Broadcast to all clients including sender.
+        socket.to(room).emit
     });
 
     socket.on("disconnect", () => {
